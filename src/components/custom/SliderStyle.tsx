@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import ProfessionalSlider from './../../assets/professional.jpg'
 import ModernGradientSlider from './../../assets/modern-gradient.jpg'
 import DarkSlider from './../../assets/dark.jpg'

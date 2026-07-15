@@ -1,4 +1,4 @@
-import { doc, getDoc, setDoc, updateDoc } from 'firebase/firestore';
+import { doc, getDoc, setDoc } from 'firebase/firestore';
 import { fireBaseDb, generateContentResilient } from './../../../../config/FirebaseConfig';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useState, useEffect, useContext } from 'react';

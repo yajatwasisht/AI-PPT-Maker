@@ -1,7 +1,6 @@
-import React from 'react'
 import { Skeleton } from '../ui/skeleton';
 import type { Outline } from '@/workspace/project/outline';
-import { Edit, ArrowRight } from 'lucide-react';
+import { Edit } from 'lucide-react';
 import { Button } from '../ui/button';
 import EditOutlineDialog from './EditOutlineDialog';
 type Props={

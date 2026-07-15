@@ -1,13 +1,11 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import {
     InputGroup,
     InputGroupAddon,
     InputGroupButton,
-    InputGroupInput,
-    InputGroupText,
     InputGroupTextarea,
 } from "@/components/ui/input-group"
-import { ArrowUp, Loader2Icon, PlusIcon } from 'lucide-react'
+import { ArrowUp, Loader2Icon } from 'lucide-react'
 import {
     Select,
     SelectContent,
@@ -71,7 +69,9 @@ function PromptBox() {
                         </InputGroupButton> */}
                         <Select 
                         items={items}
-                        onValueChange={(value:string)=>setNoOfSliders(value)}
+                        onValueChange={(value) => {
+                          if (typeof value === 'string') setNoOfSliders(value);
+                        }}
                         >
                             <SelectTrigger className="w-full max-w-48">
                                 <SelectValue />
