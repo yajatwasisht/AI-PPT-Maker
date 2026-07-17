@@ -8,11 +8,42 @@
 [![Firebase](https://img.shields.io/badge/Firebase-AI_+_Firestore-FFCA28?logo=firebase&logoColor=black)](https://firebase.google.com/)
 [![Clerk](https://img.shields.io/badge/Clerk-Auth_+_Billing-6C47FF?logo=clerk&logoColor=white)](https://clerk.com/)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind-4-06B6D4?logo=tailwindcss&logoColor=white)](https://tailwindcss.com/)
+[![Live Demo](https://img.shields.io/badge/🌐_Live_Demo-Try_it_now-00C853?style=for-the-badge&logo=vercel&logoColor=white)](https://ai-ppt-maker-lime.vercel.app/)
+
+---
+
+### 🌐 Live Demo
+
+> **Try the app in your browser — no local setup required.**
+
+<p align="center">
+  <a href="https://ai-ppt-maker-lime.vercel.app/">
+    <img src="https://img.shields.io/badge/Open_Live_App-ai--ppt--maker--lime.vercel.app-000000?style=for-the-badge&logo=vercel&logoColor=white" alt="Open Live Demo" />
+  </a>
+</p>
+
+<details open>
+<summary><strong>Click to explore the live app</strong></summary>
+
+| | |
+|---|---|
+| **Status** | Online on Vercel |
+| **URL** | [https://ai-ppt-maker-lime.vercel.app/](https://ai-ppt-maker-lime.vercel.app/) |
+| **What you can try** | Sign in → create a project from a prompt → generate outline → edit slides → export PPTX |
+
+**Quick actions**
+
+- [🚀 Launch live demo](https://ai-ppt-maker-lime.vercel.app/)
+- [📄 Jump to Pricing](https://ai-ppt-maker-lime.vercel.app/workspace/pricing)
+- [🏠 Open landing page](https://ai-ppt-maker-lime.vercel.app/)
+
+</details>
 
 ---
 
 ## Table of contents
 
+- [Live Demo](#-live-demo)
 - [What it does](#what-it-does)
 - [Quick start](#quick-start)
 - [Environment variables](#environment-variables)
