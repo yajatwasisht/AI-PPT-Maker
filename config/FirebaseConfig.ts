@@ -67,10 +67,14 @@ const ai = getAI(app, {
   useLimitedUseAppCheckTokens: true,
 });
 
-/** Preferred model, then quieter fallback when Flash is capacity/quota-limited. */
+/**
+ * Lite models still have free-tier quota. gemini-3.5-flash is routed to
+ * gemini-3.6-flash and is currently over the daily free-tier cap, so it is last.
+ */
 const MODEL_CANDIDATES = [
-  "gemini-3.5-flash",
+  "gemini-3.5-flash-lite",
   "gemini-3.1-flash-lite",
+  "gemini-3.5-flash",
 ] as const;
 
 export const GeminiAiModel = getGenerativeModel(ai, {
@@ -92,7 +96,13 @@ const isTransientAiError = (error: unknown): boolean =>
 
 /** Daily/model quota hit — skip remaining retries on this model and try the next. */
 const isModelQuotaError = (error: unknown): boolean =>
-  /quota exceeded|free_tier|GenerateRequestsPerDayPerProjectPerModel|exceeded your current quota/i.test(
+  /quota exceeded|free_tier|GenerateRequestsPerDayPerProjectPerModel|exceeded your current quota|rate-limits/i.test(
+    errorMessage(error)
+  );
+
+/** Retired or unknown model names should move on instead of failing the request. */
+const isModelUnavailable = (error: unknown): boolean =>
+  /no longer available|not found|unknown model|is not supported|\[404\b/i.test(
     errorMessage(error)
   );
 
@@ -119,15 +129,14 @@ async function withModelFallback<T>(
         return await run(model);
       } catch (error) {
         lastError = error;
-        if (!isTransientAiError(error)) {
-          throw error;
-        }
-        // Model-specific daily quota → jump to next candidate instead of waiting out retries.
-        if (isModelQuotaError(error)) {
+        if (isModelQuotaError(error) || isModelUnavailable(error)) {
           console.warn(
-            `[AI] Quota hit on ${modelName}, falling back to next model…`
+            `[AI] ${modelName} cannot be used, falling back to next model…`
           );
           break;
+        }
+        if (!isTransientAiError(error)) {
+          throw error;
         }
         await sleep(getRetryDelayMs(error, attempt));
       }

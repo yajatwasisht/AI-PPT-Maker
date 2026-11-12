@@ -197,16 +197,23 @@ function Outline() {
         .replace('{userInput}', projectData?.userInputPrompt)
         .replace('{noOfSliders}', projectData?.noOfSliders);
 
-        // To generate text output, call generateContent with the text input
-        const result = await generateContentResilient(prompt);
-
-        const response = result.response;
-        const text = response.text();
-        console.log(text);
-        const rawJson=text.replace('```json','').replace('```','');
-        const JSONData=JSON.parse(rawJson);
-        setOutline(JSONData);
-        setLoading(false);
+        try {
+            const result = await generateContentResilient(prompt);
+            const text = result.response.text();
+            const rawJson = text.replace('```json', '').replace('```', '');
+            setOutline(JSON.parse(rawJson));
+        } catch (error) {
+            console.error(error);
+            const message =
+                error instanceof Error ? error.message : 'AI request failed';
+            window.alert(
+                /quota|429|Too Many Requests/i.test(message)
+                    ? 'AI quota exceeded for the free tier. Wait and try again, or enable billing in Firebase / Google AI Studio.'
+                    : `Could not generate the outline: ${message}`
+            );
+        } finally {
+            setLoading(false);
+        }
     }
 
     const handleUpdateOutline = async (index: string, value: Outline) => {
