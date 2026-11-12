@@ -62,6 +62,9 @@ initializeAppCheck(app, {
 
 const ai = getAI(app, {
   backend: new GoogleAIBackend(),
+  // Replay protection (including monitor-only) only accepts one-time tokens.
+  // Session tokens leave Firebase AI Logic in the deactivated state.
+  useLimitedUseAppCheckTokens: true,
 });
 
 /** Preferred model, then quieter fallback when Flash is capacity/quota-limited. */
